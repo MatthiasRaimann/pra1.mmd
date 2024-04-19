@@ -7,14 +7,6 @@
     <bpmn:extensionElements>
       <camunda:executionListener expression="" event="start" />
     </bpmn:extensionElements>
-    <bpmn:startEvent id="StartEventProcessStarted">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="DatumBescheid" label="DatumBescheid" type="date" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:outgoing>SequenceFlow1</bpmn:outgoing>
-    </bpmn:startEvent>
     <bpmn:userTask id="Activity_1wr8it8" name="Antrag erstellen">
       <bpmn:incoming>SequenceFlow1</bpmn:incoming>
       <bpmn:outgoing>Flow_0c6ttis</bpmn:outgoing>
@@ -29,18 +21,34 @@
     <bpmn:sequenceFlow id="SequenceFlow1" sourceRef="StartEventProcessStarted" targetRef="Activity_1wr8it8" />
     <bpmn:sequenceFlow id="Flow_0c6ttis" sourceRef="Activity_1wr8it8" targetRef="Activity_1ii8zxf" />
     <bpmn:sequenceFlow id="Flow_1jwotfr" sourceRef="Activity_1ii8zxf" targetRef="EndEventProcessEnded" />
+    <bpmn:subProcess id="Activity_0clcaia" triggeredByEvent="true">
+      <bpmn:startEvent id="Event_0h4svc7">
+        <bpmn:outgoing>Flow_0c3vmp9</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MessageEventDefinition_18pke38" messageRef="Message_10hbvo1" />
+      </bpmn:startEvent>
+      <bpmn:endEvent id="Event_1ju4isd">
+        <bpmn:incoming>Flow_0c3vmp9</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_0c3vmp9" sourceRef="Event_0h4svc7" targetRef="Event_1ju4isd" />
+    </bpmn:subProcess>
+    <bpmn:startEvent id="StartEventProcessStarted">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="DatumBescheid" label="DatumBescheid" type="date" />
+          <camunda:formField id="businessKey" label="businessKey" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0fkgfxn" messageRef="Message_2mk47qm" />
+    </bpmn:startEvent>
   </bpmn:process>
   <bpmn:message id="Message_0e4bbmu" name="NEUER_ANTRAG" />
+  <bpmn:message id="Message_10hbvo1" name="Bescheidrueckzug" />
+  <bpmn:message id="Message_2mk47qm" name="Bescheideingang" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1vgeydg">
       <bpmndi:BPMNShape id="Participant_0ypbwne_di" bpmnElement="Participant_0ypbwne" isHorizontal="true">
-        <dc:Bounds x="160" y="85" width="1950" height="595" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_03dab4v_di" bpmnElement="StartEventProcessStarted">
-        <dc:Bounds x="212" y="192" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="210" y="228" width="40" height="27" />
-        </bpmndi:BPMNLabel>
+        <dc:Bounds x="160" y="85" width="1090" height="595" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1pq0zt6_di" bpmnElement="Activity_1wr8it8">
         <dc:Bounds x="290" y="170" width="100" height="80" />
@@ -55,6 +63,22 @@
       <bpmndi:BPMNShape id="Activity_0v5jxah_di" bpmnElement="Activity_1ii8zxf">
         <dc:Bounds x="430" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1t11wd0_di" bpmnElement="StartEventProcessStarted">
+        <dc:Bounds x="212" y="192" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18m1cbt_di" bpmnElement="Activity_0clcaia" isExpanded="true">
+        <dc:Bounds x="340" y="430" width="540" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0wasz4a_di" bpmnElement="Event_0h4svc7">
+        <dc:Bounds x="380" y="512" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ju4isd_di" bpmnElement="Event_1ju4isd">
+        <dc:Bounds x="782" y="512" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0c3vmp9_di" bpmnElement="Flow_0c3vmp9">
+        <di:waypoint x="416" y="530" />
+        <di:waypoint x="782" y="530" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_08va5r8_di" bpmnElement="SequenceFlow1">
         <di:waypoint x="248" y="210" />
         <di:waypoint x="290" y="210" />

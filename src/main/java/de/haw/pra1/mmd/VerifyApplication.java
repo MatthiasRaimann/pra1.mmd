@@ -12,9 +12,6 @@ public class VerifyApplication implements JavaDelegate {
 
         LOGGER.info(execution.getVariable("DatumBescheid")+"jijoijijlij");
 
-
-
-//        System.out.println( );
     }
 
 }
