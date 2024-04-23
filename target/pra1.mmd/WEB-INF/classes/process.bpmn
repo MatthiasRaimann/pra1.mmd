@@ -17,12 +17,9 @@
       <bpmn:outgoing>Flow_11h9o56</bpmn:outgoing>
       <bpmn:outgoing>Flow_09tz244</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="Event_04lp7ex">
-      <bpmn:incoming>Flow_11h9o56</bpmn:incoming>
-    </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow1" sourceRef="StartEventProcessStarted" targetRef="Activity_1ii8zxf" />
     <bpmn:sequenceFlow id="Flow_1jwotfr" sourceRef="Activity_1ii8zxf" targetRef="Gateway_0t6mupv" />
-    <bpmn:sequenceFlow id="Flow_11h9o56" name="Datum nicht valide" sourceRef="Gateway_0t6mupv" targetRef="Event_04lp7ex">
+    <bpmn:sequenceFlow id="Flow_11h9o56" name="Datum nicht valide" sourceRef="Gateway_0t6mupv" targetRef="Activity_1w5ma8e">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${DatumBescheidIsValid == false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="Flow_1xufnnr" name="Widerspruch abgelehnt&#10;" sourceRef="Gateway_1a15mqd" targetRef="Gateway_1jo7q5s">
@@ -64,12 +61,6 @@
       <bpmn:incoming>Flow_06t917d</bpmn:incoming>
       <bpmn:outgoing>Flow_0gpgr37</bpmn:outgoing>
     </bpmn:receiveTask>
-    <bpmn:intermediateCatchEvent id="Event_1sc4txz">
-      <bpmn:outgoing>Flow_0ft1oud</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_0ncu4mf">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5S</bpmn:timeDuration>
-      </bpmn:timerEventDefinition>
-    </bpmn:intermediateCatchEvent>
     <bpmn:userTask id="Activity_1hhwb32" name="Begruendung schreiben">
       <bpmn:incoming>Flow_0gpgr37</bpmn:incoming>
       <bpmn:outgoing>Flow_1480yt9</bpmn:outgoing>
@@ -78,12 +69,6 @@
       <bpmn:incoming>Flow_1480yt9</bpmn:incoming>
       <bpmn:outgoing>Flow_1uyvk18</bpmn:outgoing>
     </bpmn:receiveTask>
-    <bpmn:intermediateCatchEvent id="Event_0vbxaii">
-      <bpmn:outgoing>Flow_0ze1z3p</bpmn:outgoing>
-      <bpmn:timerEventDefinition id="TimerEventDefinition_05u2pcg">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">DT2M</bpmn:timeDuration>
-      </bpmn:timerEventDefinition>
-    </bpmn:intermediateCatchEvent>
     <bpmn:userTask id="Activity_0w6eds6" name="Ungültigkeitsklage einlegen">
       <bpmn:incoming>Flow_0ze1z3p</bpmn:incoming>
       <bpmn:outgoing>Flow_0u3eca8</bpmn:outgoing>
@@ -136,6 +121,26 @@
       <bpmn:incoming>Flow_1xufnnr</bpmn:incoming>
       <bpmn:outgoing>Flow_1n2kxg5</bpmn:outgoing>
     </bpmn:exclusiveGateway>
+    <bpmn:boundaryEvent id="Event_0vbxaii" attachedToRef="Activity_08wt3z3">
+      <bpmn:outgoing>Flow_0ze1z3p</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_1iepj0f">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="Event_1sc4txz" attachedToRef="Activity_01wmdx7">
+      <bpmn:outgoing>Flow_0ft1oud</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_09362vc">
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5S</bpmn:timeDuration>
+      </bpmn:timerEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:userTask id="Activity_1w5ma8e" name="Antrag ablehnen">
+      <bpmn:incoming>Flow_11h9o56</bpmn:incoming>
+      <bpmn:outgoing>Flow_0t3qwyx</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0t3qwyx" sourceRef="Activity_1w5ma8e" targetRef="Event_04lp7ex" />
+    <bpmn:endEvent id="Event_04lp7ex">
+      <bpmn:incoming>Flow_0t3qwyx</bpmn:incoming>
+    </bpmn:endEvent>
   </bpmn:process>
   <bpmn:message id="Message_0e4bbmu" name="NEUER_ANTRAG" />
   <bpmn:message id="Message_30i915b" name="Kunde Abbruchwunsch" />
@@ -153,9 +158,6 @@
       <bpmndi:BPMNShape id="Gateway_0t6mupv_di" bpmnElement="Gateway_0t6mupv" isMarkerVisible="true">
         <dc:Bounds x="578" y="515" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_04lp7ex_di" bpmnElement="Event_04lp7ex">
-        <dc:Bounds x="585" y="702" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1sjj4cr_di" bpmnElement="StartEventProcessStarted">
         <dc:Bounds x="212" y="522" width="36" height="36" />
       </bpmndi:BPMNShape>
@@ -169,18 +171,12 @@
       <bpmndi:BPMNShape id="Activity_0uyrumw_di" bpmnElement="Activity_01wmdx7">
         <dc:Bounds x="1017" y="500" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0rzc8m5_di" bpmnElement="Event_1sc4txz">
-        <dc:Bounds x="1049" y="562" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1y2iede_di" bpmnElement="Activity_1hhwb32">
         <dc:Bounds x="1180" y="500" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0st42yz_di" bpmnElement="Activity_08wt3z3">
         <dc:Bounds x="1330" y="500" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1c8gelp_di" bpmnElement="Event_0vbxaii">
-        <dc:Bounds x="1364" y="562" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0od8vzk_di" bpmnElement="Activity_0w6eds6">
         <dc:Bounds x="1332" y="644" width="100" height="80" />
@@ -213,14 +209,27 @@
       <bpmndi:BPMNShape id="Gateway_1jo7q5s_di" bpmnElement="Gateway_1jo7q5s" isMarkerVisible="true">
         <dc:Bounds x="745" y="515" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BPMNShape_0z72eg6" bpmnElement="Event_10h9pz1">
-        <dc:Bounds x="1052" y="482" width="36" height="36" />
+      <bpmndi:BPMNShape id="BPMNShape_18xup8o" bpmnElement="Activity_1w5ma8e">
+        <dc:Bounds x="553" y="670" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_04lp7ex_di" bpmnElement="Event_04lp7ex">
+        <dc:Bounds x="585" y="792" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_03uzpqg_di" bpmnElement="Event_0vbxaii">
+        <dc:Bounds x="1364" y="562" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1655pfv_di" bpmnElement="Event_0hxxmyz">
+        <dc:Bounds x="1362" y="482" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_0fxxeh5" bpmnElement="Event_0a3t950">
         <dc:Bounds x="1212" y="482" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1655pfv_di" bpmnElement="Event_0hxxmyz">
-        <dc:Bounds x="1362" y="482" width="36" height="36" />
+      <bpmndi:BPMNShape id="BPMNShape_0z72eg6" bpmnElement="Event_10h9pz1">
+        <dc:Bounds x="1052" y="482" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1fa1jmh_di" bpmnElement="Event_1sc4txz">
+        <dc:Bounds x="1049" y="562" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_08va5r8_di" bpmnElement="SequenceFlow1">
         <di:waypoint x="248" y="540" />
@@ -235,9 +244,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_11h9o56_di" bpmnElement="Flow_11h9o56">
         <di:waypoint x="603" y="565" />
-        <di:waypoint x="603" y="702" />
+        <di:waypoint x="603" y="670" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="591" y="630" width="59" height="27" />
+          <dc:Bounds x="591" y="612" width="60" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1xufnnr_di" bpmnElement="Flow_1xufnnr">
@@ -316,6 +325,10 @@
       <bpmndi:BPMNEdge id="Flow_1n2kxg5_di" bpmnElement="Flow_1n2kxg5">
         <di:waypoint x="795" y="540" />
         <di:waypoint x="870" y="540" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0t3qwyx_di" bpmnElement="Flow_0t3qwyx">
+        <di:waypoint x="603" y="750" />
+        <di:waypoint x="603" y="792" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -63,7 +63,7 @@ public class ProcessUnitTest {
             .processInstanceBusinessKey("myBusinessKey")
             .correlateStartMessage();
 
-    assertThat(processInstance).isEnded();
+    assertThat(processInstance).isNotEnded();
   }
 
   @Test
