@@ -50,7 +50,7 @@
       <bpmn:outgoing>SequenceFlow1</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_03o126c" messageRef="Message_1qa1p9r" />
     </bpmn:startEvent>
-    <bpmn:userTask id="Activity_14b99hj" name="Klage auf Akteneinsicht einlegen">
+    <bpmn:userTask id="Activity_14b99hj" name="Klage auf Akteneinsicht einlegen" camunda:assignee="Martin">
       <bpmn:incoming>Flow_0ft1oud</bpmn:incoming>
       <bpmn:outgoing>Flow_1tcu24w</bpmn:outgoing>
     </bpmn:userTask>
@@ -61,7 +61,7 @@
       <bpmn:incoming>Flow_06t917d</bpmn:incoming>
       <bpmn:outgoing>Flow_0gpgr37</bpmn:outgoing>
     </bpmn:receiveTask>
-    <bpmn:userTask id="Activity_1hhwb32" name="Begruendung schreiben">
+    <bpmn:userTask id="Activity_1hhwb32" name="Begruendung schreiben" camunda:assignee="Matthias">
       <bpmn:incoming>Flow_0gpgr37</bpmn:incoming>
       <bpmn:outgoing>Flow_1480yt9</bpmn:outgoing>
     </bpmn:userTask>
@@ -69,14 +69,14 @@
       <bpmn:incoming>Flow_1480yt9</bpmn:incoming>
       <bpmn:outgoing>Flow_1uyvk18</bpmn:outgoing>
     </bpmn:receiveTask>
-    <bpmn:userTask id="Activity_0w6eds6" name="Ungültigkeitsklage einlegen">
+    <bpmn:userTask id="Activity_0w6eds6" name="Ungültigkeitsklage einlegen" camunda:assignee="Ulrike">
       <bpmn:incoming>Flow_0ze1z3p</bpmn:incoming>
       <bpmn:outgoing>Flow_0u3eca8</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:endEvent id="Event_1yf75ws">
       <bpmn:incoming>Flow_0u3eca8</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Activity_11lu7w6" name="Verfahren beenden und Rechnung schreiben">
+    <bpmn:userTask id="Activity_11lu7w6" name="Verfahren beenden und Rechnung schreiben" camunda:assignee="Dirk">
       <bpmn:incoming>Flow_0avnqqw</bpmn:incoming>
       <bpmn:outgoing>Flow_0ni3a9l</bpmn:outgoing>
     </bpmn:userTask>
@@ -121,7 +121,7 @@
       <bpmn:incoming>Flow_1xufnnr</bpmn:incoming>
       <bpmn:outgoing>Flow_1n2kxg5</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Activity_1w5ma8e" name="Antrag ablehnen">
+    <bpmn:userTask id="Activity_1w5ma8e" name="Antrag ablehnen" camunda:assignee="Mathis">
       <bpmn:incoming>Flow_11h9o56</bpmn:incoming>
       <bpmn:outgoing>Flow_0t3qwyx</bpmn:outgoing>
     </bpmn:userTask>
